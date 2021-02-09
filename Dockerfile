@@ -12,4 +12,4 @@ COPY chapter6/test-program.jar .
 RUN yum -y update && yum install -y java-11-openjdk
 
 # Tells the docker to run automatic command in the container. In this case run the java program installed in /usr/local/bin.
-CMD ["java", "-jar", "test-program.jar"]
+ENTRYPOINT ["java", "-jar", "test-program.jar"]
