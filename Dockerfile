@@ -1,14 +1,15 @@
+# Is the same as `$ docker image pull centos`
+FROM centos:latest
 
-FROM tomcat:8.5.16-jre8
+MAINTAINER Zeev Lazarev "zlazarev@gmail.com"
 
-MAINTAINER Richard Chesterwood "contact@virtualpairprogrammers.com"
+WORKDIR /usr/local/bin
 
-RUN rm -rf ./webapps/*
+# The `.` means WORKDIR
+COPY chapter6/test-program.jar .
 
-EXPOSE 8080
+# Is the same as executing commands inside of container's terminal after `$ docker container run -it centos`
+RUN yum -y update && yum install -y java-11-openjdk
 
-ENV JAVA_OPTS="-Dspring.profiles.active=docker-demo"
-
-ADD target/fleetman-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
-
-CMD ["catalina.sh", "run"]
+# Tells the docker to run automatic command in the container. In this case open the bash shell.
+CMD ["/bin/bash"]
