@@ -11,5 +11,5 @@ COPY chapter6/test-program.jar .
 # Is the same as executing commands inside of container's terminal after `$ docker container run -it centos`
 RUN yum -y update && yum install -y java-11-openjdk
 
-# Tells the docker to run automatic command in the container. In this case open the bash shell.
-CMD ["/bin/bash"]
+# Tells the docker to run automatic command in the container. In this case run the java program installed in /usr/local/bin.
+CMD ["java", "-jar", "test-program.jar"]
